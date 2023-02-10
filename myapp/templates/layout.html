@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- CSS File -->
-    <link href="{% static 'layout1.css' %}" rel="stylesheet">
-    <link href="{% static 'post.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'layout.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'post.css' %}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <title>{% block title %} Keio BroadCasting Society {% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -17,7 +17,7 @@
     {% endblock %}
   </head>
 
-            <header class="header">
+    <div class="headerup23">
                 <p> broadcastingsociety </p>
                 <span style="font-style:oblique; color: white">スマートフォンには対応していません</span>
                 {% if request.user.is_authenticated %}
@@ -27,7 +27,7 @@
                 <a href="{% url 'login' %}"><button class="btn btn-warning"> Log In </button></a>
                 <a href="{% url 'register' %}"><button class="btn btn-warning"> Register </button></a>
                 {% endif %}
-            </header>
+    </div>
 
     <body>
 
