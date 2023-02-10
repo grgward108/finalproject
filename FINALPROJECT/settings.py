@@ -33,7 +33,8 @@ ALLOWED_HOSTS = ['finalproject-grgward108.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'myapp'
+    'myapp',
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -128,4 +129,3 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-django_heroku.settings(locals)
