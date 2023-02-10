@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block script %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'post.css' %}">
+
+{% endblock %}
+
+{% block body %}
+
+<div>admin: {{request.user}}</div>
+
+{% for obj in member %}
+
+<div class="li-data-list" style="justify-content: space-between">
+    <div>
+        <p> {{obj}}  </p>
+    </div>
+    <div>
+        {% if obj.isactive %}
+            {% if obj.isadmin %}
+            <button class="btn btn-success">ADMIN</button>
+            {% else %}
+            <a href="{% url 'activate' obj.id %}"><button class="btn btn-dark">Deactivate</button></a>
+            {% endif %}
+        {% else %}
+            <a href="{% url 'activate' obj.id  %}"><button class="btn btn-warning">Activate</button></a>
+        {% endif %}
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}

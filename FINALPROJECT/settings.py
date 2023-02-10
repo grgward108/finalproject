@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-#6p(+s9*yi-1r_iey2%ngmm$4(m*$^ja&(0!jzj100_qflb_5-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['finalproject-grgward108.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -118,12 +118,13 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
+LOGIN_URL = '/login/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+AUTH_USER_MODEL = 'myapp.User'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

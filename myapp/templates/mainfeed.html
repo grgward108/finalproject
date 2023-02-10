@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block activemainfeed %} active {%endblock%}
+{% block body %}
+
+<div>
+{% if request.user.is_authenticated %}
+{% if member.isactive %}
+{% for item in allobjects %}
+
+    {% if item.keyword == "gossip" %}
+
+        <div class="post-container">
+            <div class="placeheader">
+                <img class="profile-picture" src="{{item.poster.profilepicture}}" alt="{{item.poster}}">
+                <div class="post-header">
+                    <span class="username">匿名</span>
+                    <span class="post-date">{{item.postdate}}</span>
+                </div>
+            </div>
+            <p class="post-description">{{item.impressions}}</p>
+        </div>
+
+
+
+    {% elif item.keyword == "movie" %}
+
+        <div class="post-container">
+            <div class="placeheader">
+                <img class="profile-picture" src="{{item.poster.profilepicture}}" alt="{{item.poster}}">
+                <div class="post-header">
+                    <a href="{% url 'profile' item.poster %}"><span class="username">{{item.poster}}</span></a>
+                    <span class="post-date">{{item.postdate}}</span>
+                </div>
+            </div>
+            <p class="post-description">{{item.impressions}}</p>
+            <div class="li-data-list nomargin">
+                <div>
+                    <img class="card-img-top" i style="width: 180px; height: auto"src="{{item.thumbnail}}" alt="{{item.name}}">
+                </div>
+                <div class="card-body">
+                        <h4 class="card-title-search" >{{item.name}}</h4>
+                </div>
+            </div>
+        </div>
+
+
+    {% elif item.keyword == "youtubevideo" %}
+
+        <div class="post-container">
+            <div class="placeheader">
+                <img class="profile-picture" src="{{item.poster.profilepicture}}" alt="{{item.poster}}">
+                <div class="post-header">
+                    <a href="{% url 'profile' item.poster %}"><span class="username">{{item.poster}}</span></a>
+                    <span class="post-date">{{item.postdate}}</span>
+                </div>
+            </div>
+            <p class="post-description">{{item.impressions}}</p>
+            <div class="li-data-list nomargin">
+                <div>
+                    <img class="card-img-top" i style="width: 180px; height: auto"src="{{item.thumbnail}}" alt="{{item.name}}">
+                </div>
+                <div class="card-body">
+                        <a href=" https://www.youtube.com/watch?v={{item.videoid}} " target="_blank"><h4 class="card-title-search" >{{item.name}}</h4></a>
+                        <h4 class="card-title-search" >{{item.channel}}</h4>
+                </div>
+            </div>
+        </div>
+
+
+    {% elif item.keyword == "music" %}
+
+
+        <div class="post-container">
+            <div class="placeheader">
+                <img class="profile-picture" src="{{item.poster.profilepicture}}" alt="{{item.poster}}">
+                <div class="post-header">
+                    <a href="{% url 'profile' item.poster %}"><span class="username">{{item.poster}}</span></a>
+                    <span class="post-date">{{item.postdate}}</span>
+                </div>
+            </div>
+            <p class="post-description">{{item.impressions}}</p>
+            <div class="li-data-list nomargin">
+                <div>
+                    <img class="card-img-top" i style="width: 180px; height: 180px"src="{{item.thumbnail}}" alt="{{item.songtitle}}">
+                </div>
+                <div class="card-body">
+                        <h4 class="card-title-search" >{{item.songtitle}}</h4>
+                        <h4 class="card-title-search" >{{item.artist}}</h4>
+                        <h4 class="card-title-search" >{{item.album}}</h4>
+                        <audio class="audio-player" src="{{item.previewurl}}" controls=true></audio>
+                </div>
+            </div>
+        </div>
+
+
+
+    {% endif %}
+
+
+
+
+
+{% endfor %}
+
+
+{% else %}
+
+    <p> Please wait for the admin to approve your account.</p>
+    <p> 管理者がアカウントを承認するのをお待ちください</p>
+
+{% endif %}
+{% endif %}
+
+</div>
+{% endblock %}
+
+{% block widgets %}
+<a href="{% url 'profile' request.user %}"><span class="username">{{request.user}}</span></a>
+
+{% if member.isactive %}
+<a href="{% url 'admin' %}"><button class="btn btn-outline-warning">Admin</button></a>
+{% endif %}
+
+{% endblock %}

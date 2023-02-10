@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS File -->
+    <link href="{% static 'layout1.css' %}" rel="stylesheet">
+    <link href="{% static 'post.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <title>{% block title %} Keio BroadCasting Society {% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    {% block script %}
+    {% endblock %}
+  </head>
+
+            <header class="header">
+                <p> broadcastingsociety </p>
+                <span style="font-style:oblique; color: white">スマートフォンには対応していません</span>
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'profile' request.user %}">><button class="btn btn-warning">{{request.user}}</button></a>               
+                <a href="{% url 'logout' %}"><button class="btn btn-warning"> Log Out </button></a>
+                {% else %}
+                <a href="{% url 'login' %}"><button class="btn btn-warning"> Log In </button></a>
+                <a href="{% url 'register' %}"><button class="btn btn-warning"> Register </button></a>
+                {% endif %}
+            </header>
+
+    <body>
+
+          <div class="side-bar">
+              <div class="nav">
+                <a href="{% url 'index' %}" class="nav-link {% block activemainfeed %} {%endblock%}" >            
+                  <span>Home</span>
+                </a>
+                <a class="nav-link {% block activegossip %} {%endblock%}" >            
+                  <span>Gossip</span>
+                </a>
+                <a class="nav-link {% block activemusic %} {%endblock%}" href="https://accounts.spotify.com/authorize?client_id=ba3f5e0f0bbb4b3e973df8367d56d100&response_type=code&redirect_uri=http://127.0.0.1:8000/spotify&scope=user-library-read" >           
+                  <span>Music </span>
+                </a>
+               <a href="{% url 'tmdb' %}" class="nav-link {% block activemovie %} {%endblock%}" >       
+                <span>Movie</span>
+               </a>
+               <a href="{% url 'youtube' %}" class="nav-link {% block activevideo %} {%endblock%}" >       
+                <span>Video</span>
+               </a>
+              </div>
+          </div>
+
+          
+          <div class="feed">
+              {% block body %}
+              {% endblock %}
+
+          </div>
+
+          <div class="widgets">
+            {% block widgets %}
+            {% endblock %}
+
+          </div>
+
+    </main>
+  <!-- Main Body Ends -->
+    </body>
+</html>

@@ -1,0 +1,147 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block activemainfeed %} active {%endblock%}
+{% block body %}
+
+<div>
+
+
+{% if member.isactive %}
+
+    {% if user.is_authenticated and isuser %}
+    <button class="btn btn-outline-warning">Edit Profile</button>
+    {% endif %}
+
+    {% for item in page_obj  %}
+
+    {% if item.keyword == "gossip" %}
+
+        <div class="post-container">
+            <div class="placeheader">
+                <img class="profile-picture" src="{{item.poster.profilepicture}}" alt="{{item.poster}}">
+                <div class="post-header">
+                    <span class="username">匿名</span>
+                    <span class="post-date">{{item.postdate}}</span>
+                </div>
+            </div>
+            <p class="post-description">{{item.impressions}}</p>
+        </div>
+
+
+
+    {% elif item.keyword == "movie" %}
+
+        <div class="post-container">
+            <div class="placeheader">
+                <img class="profile-picture" src="{{item.poster.profilepicture}}" alt="{{item.poster}}">
+                <div class="post-header">
+                    <span class="username">{{item.poster}}</span>
+                    <span class="post-date">{{item.postdate}}</span>
+                </div>
+            </div>
+            <p class="post-description">{{item.impressions}}</p>
+            <div class="li-data-list nomargin">
+                <div>
+                    <img class="card-img-top" i style="width: 180px; height: auto"src="{{item.thumbnail}}" alt="{{item.name}}">
+                </div>
+                <div class="card-body">
+                        <h4 class="card-title-search" >{{item.name}}</h4>
+                        <h4 class="card-title-search" >{{item.overview}}</h4>
+                </div>
+            </div>
+        </div>
+
+
+    {% elif item.keyword == "youtubevideo" %}
+
+        <div class="post-container">
+            <div class="placeheader">
+                <img class="profile-picture" src="{{item.poster.profilepicture}}" alt="{{item.poster}}">
+                <div class="post-header">
+                    <a href="{% url 'profile' item.poster %}"><span class="username">{{item.poster}}</span></a>
+                    <span class="post-date">{{item.postdate}}</span>
+                </div>
+            </div>
+            <p class="post-description">{{item.impressions}}</p>
+            <div class="li-data-list nomargin">
+                <div>
+                    <img class="card-img-top" i style="width: 180px; height: auto"src="{{item.thumbnail}}" alt="{{item.name}}">
+                </div>
+                <div class="card-body">
+                        <a href=" https://www.youtube.com/watch?v={{item.videoid}} " target="_blank"><h4 class="card-title-search" >{{item.name}}</h4></a>
+                        <h4 class="card-title-search" >{{item.channel}}</h4>
+                </div>
+            </div>
+        </div>
+
+
+    {% elif item.keyword == "music" %}
+
+
+        <div class="post-container">
+            <div class="placeheader">
+                <img class="profile-picture" src="{{item.poster.profilepicture}}" alt="{{item.poster}}">
+                <div class="post-header">
+                    <span class="username">{{item.poster}}</span>
+                    <span class="post-date">{{item.postdate}}</span>
+                </div>
+            </div>
+            <p class="post-description">{{item.impressions}}</p>
+            <div class="li-data-list nomargin">
+                <div>
+                    <img class="card-img-top" i style="width: 180px; height: 180px"src="{{item.thumbnail}}" alt="{{item.name}}">
+                </div>
+                <div class="card-body">
+                        <h4 class="card-title-search" >{{item.name}}</h4>
+                        <h4 class="card-title-search" >{{item.artist}}</h4>
+                        <h4 class="card-title-search" >{{item.album}}</h4>
+                        <audio class="audio-player" src="{{item.previewurl}}" controls=true></audio>
+                </div>
+            </div>
+        </div>
+
+
+
+    {% endif %}
+
+
+
+
+
+    {% endfor %}
+
+
+{% else %}
+
+    <p> Please wait for the admin to approve your account.</p>
+    <p> 管理者がアカウントを承認するのをお待ちください</p>
+
+{% endif %}
+
+
+
+
+</div>
+
+<nav aria-label="Page navigation example paginationpadding">
+    <ul class="pagination justify justify-content-center paginationpadding">
+        {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; </a></li>
+            <li class="page-item"><a class="page-link" href="?page = {{ page_obj.previous_page_number}}">Previous</a></li>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page= {{page_obj.next_page_number}}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page= {{page_obj.paginator.num_pages}}">{{page_obj.paginator.num_pages}} &raquo;</a></li>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}
+
+{% block widgets %}
+  <p> {{request.user}}
+  <p> {{member.isactive}}</p>
+
+{% endblock %}
