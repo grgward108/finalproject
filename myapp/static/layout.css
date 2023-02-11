@@ -115,24 +115,32 @@ body{
         flex-direction: column;
     }
 
-    .header{
+    .headerup23{
         display: none;
-
     }
+
     .side-bar {
        
-        display:none;
+        display: none;
     }
+
     .feed {
         order: 2;
         width: 100%;
     }
+
     .widgets {
-        padding: 0px;
-        margin: 0px;
-        order: 1;
         width: 100%;
+        order: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 20px;
+        margin-bottom: 15px;
+        margin-top: 15px;
+        }
     }
+
 }
 
 .tiny{

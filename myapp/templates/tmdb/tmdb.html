@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block script %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'post.css' %}">
+    <script src="{% static 'tmdb.js' %}"></script>
+
+{% endblock %}
+
+{% block activemovie %}
+active
+{% endblock %}
+
+{% block body %}
+
+<div id="postvideo">
+    <span> logged in as {{member}}</span>
+</div>
+
+
+{% if member.isactive %}
+{% for item in allobjects %}
+
+<div class="post-container">
+    <div class="placeheader">
+        <img class="profile-picture" src="{{item.poster.profilepicture}}" alt="{{item.poster}}">
+        <div class="post-header">
+            <span class="username">{{item.poster}}</span>
+            <span class="post-date">{{item.postdate}}</span>
+        </div>
+    </div>
+    <p class="post-description">{{item.impressions}}</p>
+    <div class="li-data-list nomargin">
+        <div>
+            <img class="card-img-top" i style="width: 180px; height: auto"src="{{item.thumbnail}}" alt="{{item.name}}">
+        </div>
+        <div class="card-body">
+                <h4 class="card-title-search" >{{item.name}}</h4>
+        </div>
+    </div>
+</div>
+
+
+{% endfor %}
+
+
+{% else %}
+
+    <p> Please wait for the admin to approve your account.</p>
+    <p> 管理者がアカウントを承認するのをお待ちください</p>
+
+{% endif %}
+
+
+{% endblock %}
+
+{% block widgets %}
+
+<div class="container">
+    <p class="text-center mt-5">
+        search the movie
+    </p>
+    <form>
+        <div class="form-group flex">
+            <input type="text" class="form-control" name="" id="search">
+            <input type="submit" class="btn btn-danger" value="検索">
+        </div>
+    </form>
+
+
+    <div class="row mx-4" id="videos">
+
+    </div>
+    
+</div>
+
+    
+{% endblock %}

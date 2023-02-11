@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block script %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'post.css' %}">
+    <script src="{% static 'spotify.js' %}"></script>
+
+{% endblock %}
+
+{% block activemusic %}
+active
+{% endblock %}
+
+{% block body %}
+
+{% if member.isactive %}
+<div id="postvideo">
+    <span> logged in as {{member}}</span>
+</div>
+
+{% for item in allobjects %}
+
+<div class="post-container">
+    <div class="placeheader">
+        <img class="profile-picture" src="{{item.poster.profilepicture}}" alt="{{item.poster}}">
+        <div class="post-header">
+                    <a href="{% url 'profile' item.poster %}"><span class="username">{{item.poster}}</span></a>
+                    <span class="post-date">{{item.postdate}}</span>
+        </div>
+    </div>
+    <p class="post-description">{{item.impressions}}</p>        
+    <div class="li-data-list nomargin">
+        <div>
+            <img class="card-img-top" i style="width: 180px; height: auto"src="{{item.thumbnail}}" alt="{{item.songtitle}}">
+        </div>
+        <div class="card-body">
+            <h4 class="card-title-search" >{{item.songtitle}}</h4>
+            <h4 class="card-title-search" >{{item.artist}}</h4>
+            <h4 class="card-title-search" >{{item.album}}</h4>
+            <audio class="audio-player" src="{{item.previewurl}}" controls=true></audio>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+
+{% else %}
+
+    <p> Please wait for the admin to approve your account.</p>
+    <p> 管理者がアカウントを承認するのをお待ちください</p>
+
+{% endif %}
+
+
+{% endblock %}
+
+{% block widgets %}
+
+<div class="container">
+    <p class="text-center mt-5">
+        search the songtitle
+    </p>
+<div id="loading-spinner" style="display:none">
+    <p>Please wait...</p>
+</div>
+    <form>
+        <div class="form-group flex">
+            <input type="text" class="form-control" name="" id="search">
+            <input type="submit" class="btn btn-danger" value="検索">
+        </div>
+    </form>
+
+    <div id="videos">
+
+    </div>
+    
+</div>
+
+{% endblock %}
