@@ -127,10 +127,8 @@ body{
         width: 100%;
     }
     .widgets {
-        padding: 0px;
-        margin: 0px;
-        order: 1;
-        width: 100%;
+        display:none
+
     }
 }
 
