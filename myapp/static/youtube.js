@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    let API_KEY = process.env.YOUTUBE_API
+    
 
     $("form").submit((e) => {
         e.preventDefault()

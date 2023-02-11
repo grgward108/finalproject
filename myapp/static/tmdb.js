@@ -143,7 +143,6 @@ $(document).ready(function(){
     })})
 
 function moviesearch(search) {
-    let api_key = process.env.API_KEY;
     fetch(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=ja-JP&query=${search}&page=1&include_adult=false`)
     .then(response => response.json())
     .then(data => {

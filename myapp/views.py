@@ -11,9 +11,8 @@ from itertools import chain
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-
-
 from .models import User, Member, Gossip, Movies, YoutubeVideos, Music
+from decouple import config
 
 
 @login_required
@@ -218,6 +217,8 @@ def makepostmovie(request):
 
 @login_required
 def spotify(request):
+    CLIENT_ID = config('CLIENT_ID')
+    CLIENT_SECRET = config('CLIENT_SECRET')
 
     allobjects = sorted(chain(
         Music.objects.filter(poster__isactive=True),
@@ -228,11 +229,16 @@ def spotify(request):
     member = Member.objects.get(id = a.id)
     return render(request, 'spotify/spotify.html', {
         "allobjects" : allobjects,
-        "member" : member
+        "member" : member,
+        "client_id" : CLIENT_ID,
+        "client_secret" : CLIENT_SECRET
     })
 
 @login_required
 def tmdb(request):
+
+    API_KEY = config('API_KEY')
+ 
     allobjects = sorted(chain(
         Movies.objects.filter(poster__isactive=True),
     ), key=lambda instance: instance.postdate, reverse= True)
@@ -241,11 +247,14 @@ def tmdb(request):
     member = Member.objects.get(id = a.id)
     return render(request, 'tmdb/tmdb.html',{
         "member" : member,
-        "allobjects" : allobjects
+        "allobjects" : allobjects,
+        "api_key" : API_KEY
     })
 
 @login_required
 def youtube(request):
+
+    YOUTUBE_API = config('YOUTUBE_API')
     allobjects = sorted(chain(
         YoutubeVideos.objects.filter(poster__isactive=True),
     ), key=lambda instance: instance.postdate, reverse= True)
@@ -254,7 +263,8 @@ def youtube(request):
     member = Member.objects.get(id = a.id)
     return render(request, 'youtube/youtube.html',{
         "member" : member,
-        "allobjects" : allobjects
+        "allobjects" : allobjects,
+        "API_KEY": YOUTUBE_API
     })
 
 def admin(request):

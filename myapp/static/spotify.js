@@ -209,8 +209,7 @@ function gettrack(access_token, search) {
   
 function getToken() {
 
-    let client_id = process.env.CLIENT_ID;
-    let client_secret = process.env.CLIENT_SECRET;
+
   
     let authOptions = {
       method: 'POST',
