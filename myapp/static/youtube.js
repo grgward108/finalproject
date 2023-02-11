@@ -162,7 +162,7 @@ function videoSearch(apikey, search, maxResults){
 
     .then(response => response.json())
     .then(data => {
-        
+        console.log(data)
         
         data.items.forEach(item => {
             console.log(item)
