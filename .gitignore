@@ -35,3 +35,7 @@ docs/_build/
 
 .env
 .env.local
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
