@@ -7,3 +7,4 @@ psycopg2-binary==2.9.9 # Adjust for your specific version
 python-decouple==3.7
 sqlparse==0.4.3
 whitenoise==6.3.0
+python-dotenv==0.21.0
