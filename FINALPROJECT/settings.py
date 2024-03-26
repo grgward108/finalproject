@@ -135,3 +135,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Assuming .env.local is in the same directory as your settings.py file
+env_path = Path(__file__).resolve().parent / '.env.local'
+load_dotenv(dotenv_path=env_path)
+
+CLIENT_ID = os.getenv("CLIENT_ID")
+CLIENT_SECRET = os.getenv("CLIENT_SECRET")
+API_KEY = os.getenv("API_KEY")
+YOUTUBE_API = os.getenv("YOUTUBE_API")
