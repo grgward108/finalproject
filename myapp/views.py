@@ -13,6 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from .models import User, Member, Gossip, Movies, YoutubeVideos, Music
 from decouple import config
+import os
 
 
 @login_required
@@ -217,8 +218,8 @@ def makepostmovie(request):
 
 @login_required
 def spotify(request):
-    CLIENT_ID = config('CLIENT_ID')
-    CLIENT_SECRET = config('CLIENT_SECRET')
+    CLIENT_ID = os.getenv('CLIENT_ID')
+    CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 
     allobjects = sorted(chain(
         Music.objects.filter(poster__isactive=True),
@@ -237,7 +238,7 @@ def spotify(request):
 @login_required
 def tmdb(request):
 
-    API_KEY = config('API_KEY')
+    API_KEY = os.getenv('API_KEY')
  
     allobjects = sorted(chain(
         Movies.objects.filter(poster__isactive=True),
@@ -254,7 +255,7 @@ def tmdb(request):
 @login_required
 def youtube(request):
 
-    YOUTUBE_API = config('YOUTUBE_API')
+    YOUTUBE_API = os.getenv('YOUTUBE_API')
     
     allobjects = sorted(chain(
         YoutubeVideos.objects.filter(poster__isactive=True),
@@ -265,7 +266,7 @@ def youtube(request):
     return render(request, 'youtube/youtube.html',{
         "member" : member,
         "allobjects" : allobjects,
-        "API_KEY": YOUTUBE_API
+        "youtube_api": YOUTUBE_API
     })
 
 def admin(request):
