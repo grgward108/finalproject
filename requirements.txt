@@ -5,3 +5,5 @@ python-decouple==3.7
 sqlparse==0.4.3
 whitenoise==6.3.0
 python-dotenv==0.21.0
+django-storages
+boto3

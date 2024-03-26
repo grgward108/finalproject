@@ -1,41 +1,4 @@
-# General
-*.log
-*.pyc
-*.db
-__pycache__/
-db.sqlite3
 .env
 .env.local
-.DS_Store # For macOS users
-Thumbs.db # For Windows users
-
-# Virtual environment
-venv/
-env/
-ENV/
-
-# IDE specific files
-.idea/ # For JetBrains IDEs like PyCharm
-.vscode/ # For Visual Studio Code settings
-*.swp # For Vim temporary files
-
-# Django static and media files
-/static
-/media
-
-# Other files and directories
-*.pyo
-*.pyd
-*.pyc
-*.cache
-*.egg-info
-/dist
-/build
-docs/_build/
-
-.env
-.env.local
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
+newenv/
+static/
